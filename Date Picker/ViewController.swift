@@ -40,13 +40,28 @@ class ViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         currentTimeLabel.text = formatter.string(from: date)
         if currentTimeLabel.text == timeLabel.text {
-            view.backgroundColor = UIColor.green
+            let myAlert = UIAlertController(title: "알림", message: "설정된 시간이 되었습니다!", preferredStyle: .alert)
             
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: { (myAction: UIAlertAction) -> Void in
+                self.view.backgroundColor = UIColor.red
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(myAction: UIAlertAction) -> Void in
+                self.view.backgroundColor = UIColor.white
+            })
+            
+            let testAction = UIAlertAction(title: "Delete", style: .destructive, handler: {(myAction: UIAlertAction) -> Void in
+                self.view.backgroundColor = UIColor.green
+            })
+            
+            myAlert.addAction(okAction)
+            myAlert.addAction(cancelAction)
+            myAlert.addAction(testAction)
+            present(myAlert, animated: true, completion: nil)            
         }
         
 }
     @IBAction func Reset(_ sender: Any) {
         view.backgroundColor = UIColor.white
     }
-    
 }
